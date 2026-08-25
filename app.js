@@ -21,10 +21,19 @@ document.documentElement.classList.add('js');
     return m;
   }
 
+  var CAT_KANJI = { debit: '刀', credit: '炎', loan: '雷' };
+
   /* Карточка предложения. Разметка согласована с аудитом доступности:
      li > (logo alt="") + brand + h3 + chips(ul) + кнопка со скрытой подписью. */
   function renderCard(offer) {
     var li = el('li', 'card');
+
+    /* мини-печать категории в углу — декоративная */
+    if (CAT_KANJI[offer.cat]) {
+      var st = el('span', 'stamp card-stamp', CAT_KANJI[offer.cat]);
+      st.setAttribute('aria-hidden', 'true');
+      li.appendChild(st);
+    }
 
     var top = el('div', 'card-top');
     var logo = el('span', 'card-logo');
