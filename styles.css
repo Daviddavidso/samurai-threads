@@ -135,19 +135,6 @@ a { color: var(--red-text); }
   font-family: var(--font-kanji);
 }
 
-/* красная печать-ханко: белый кант внутри, лёгкий наклон — как оттиск */
-.stamp {
-  display: inline-grid;
-  place-items: center;
-  background: var(--red);
-  color: var(--white);
-  font-family: var(--font-kanji);
-  line-height: 1;
-  border-radius: 6px;
-  transform: rotate(-4deg);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .3),
-              inset 0 0 0 5px var(--red);
-}
 .brand-name {
   font-family: var(--font-display);
   font-weight: 700;
@@ -285,19 +272,6 @@ a { color: var(--red-text); }
   font-family: var(--font-kanji);
   user-select: none;
 }
-/* авторская печать на солнце — как на гравюрах */
-.seal-hero {
-  position: absolute;
-  left: 4%;
-  bottom: 10%;
-  width: 60px; height: 60px;
-  font-size: 32px;
-  transform: rotate(-7deg);
-  z-index: 2;
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .3),
-              inset 0 0 0 5px var(--red),
-              0 4px 18px rgba(0, 0, 0, .5);
-}
 
 /* красная нить: тонкая линия, сшивающая хиро с каталогом */
 .thread-divider {
@@ -379,10 +353,12 @@ a { color: var(--red-text); }
   gap: 18px;
   margin-bottom: 10px;
 }
-/* иероглиф раздела — крупная печать */
+/* иероглиф раздела — просто крупный знак, без плашек */
 .section-kanji {
-  width: 52px; height: 52px;
-  font-size: 28px;
+  font-size: 38px;
+  line-height: 1;
+  color: var(--red);
+  font-family: var(--font-kanji);
   flex: none;
 }
 .section h2, .page-hero h1 {
@@ -420,7 +396,7 @@ a { color: var(--red-text); }
   transition: border-color .18s, transform .18s;
 }
 .card:hover {
-  border-color: var(--red-bright);
+  border-color: var(--line-strong);
   transform: translateY(-2px);
 }
 /* красная нить прошивает верх карточки при ховере */
@@ -433,26 +409,11 @@ a { color: var(--red-text); }
   transition: width .25s;
 }
 .card:hover::before { width: 100%; }
-/* мини-печать категории в углу карточки */
-.card-stamp {
-  position: absolute;
-  top: 14px; right: 14px;
-  width: 28px; height: 28px;
-  font-size: 15px;
-  border-radius: 5px;
-  opacity: .55;
-  transition: opacity .2s;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3),
-              inset 0 0 0 3px var(--red);
-}
-.card:hover .card-stamp { opacity: 1; }
 
 .card-top {
   display: flex;
   align-items: center;
   gap: 12px;
-  /* правый отступ — чтобы длинный заголовок не заезжал под угловую печать */
-  padding-right: 36px;
 }
 .card-logo {
   width: 52px; height: 52px;
@@ -495,12 +456,13 @@ a { color: var(--red-text); }
   gap: 6px;
   margin-top: auto;
 }
+/* фичи — просто текст, без рамок-пилюль: меньше «блоков» на карточке */
+.card-chips {
+  gap: 5px 16px;
+}
 .card-chips li {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--muted);
-  border: 1px solid var(--line-strong);
-  padding: 4px 9px;
-  border-radius: 999px;
   white-space: nowrap;
 }
 
@@ -514,8 +476,7 @@ a { color: var(--red-text); }
   border-color: var(--red-bright);
   color: var(--red-text);
 }
-.card .btn:hover,
-.card:hover .btn {
+.card .btn:hover {
   background: var(--red);
   color: var(--white);
 }
@@ -657,22 +618,13 @@ a { color: var(--red-text); }
 }
 /* номера шагов — печати с японскими числами 一 二 三 */
 .steps li::before {
-  content: counter(step, cjk-decimal);       /* fallback для старых браузеров */
-  content: counter(step, cjk-decimal) / ""; /* современные: скрыто от скринридеров */
+  content: "0" counter(step);
   position: absolute;
   left: 0; top: 16px;
-  width: 42px; height: 42px;
-  display: grid;
-  place-items: center;
-  background: var(--red);
-  color: var(--white);
-  font-family: var(--font-kanji);
-  font-size: 22px;
-  line-height: 1;
-  border-radius: 6px;
-  transform: rotate(-4deg);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .3),
-              inset 0 0 0 5px var(--red);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--red-bright);
 }
 .steps b {
   display: block;
