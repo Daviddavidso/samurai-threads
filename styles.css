@@ -451,6 +451,8 @@ a { color: var(--red-text); }
   display: flex;
   align-items: center;
   gap: 12px;
+  /* правый отступ — чтобы длинный заголовок не заезжал под угловую печать */
+  padding-right: 36px;
 }
 .card-logo {
   width: 52px; height: 52px;
@@ -502,10 +504,20 @@ a { color: var(--red-text); }
   white-space: nowrap;
 }
 
+/* кнопки в карточках спокойные: контур, заливка только на ховере —
+   иначе 12 красных плашек подряд бьют по глазам */
 .card .btn {
   width: 100%;
   padding: 11px 16px;
   font-size: 14px;
+  background: transparent;
+  border-color: var(--red-bright);
+  color: var(--red-text);
+}
+.card .btn:hover,
+.card:hover .btn {
+  background: var(--red);
+  color: var(--white);
 }
 
 /* --------------------------------------------------------- category tiles */
@@ -645,7 +657,8 @@ a { color: var(--red-text); }
 }
 /* номера шагов — печати с японскими числами 一 二 三 */
 .steps li::before {
-  content: counter(step, cjk-decimal);
+  content: counter(step, cjk-decimal);       /* fallback для старых браузеров */
+  content: counter(step, cjk-decimal) / ""; /* современные: скрыто от скринридеров */
   position: absolute;
   left: 0; top: 16px;
   width: 42px; height: 42px;
